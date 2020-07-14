@@ -15,4 +15,6 @@
 
 	$sql = "INSERT INTO students (name,email,cell,photo) VALUES ('$name','$email','$cell','$photo_name')";
 	$connection -> query($sql);
+
+	echo '<p class = "alert alert-success">data update sucessfully <button class="close" data-dismiss = "alert">&times;</button></p>';
  ?>

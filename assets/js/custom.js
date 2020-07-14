@@ -31,7 +31,12 @@
 				contentType: false,
 				processData: false,
 				success: function(data){
-					alert(data);
+
+					$('form#add_student_form')[0].reset();
+					
+					$('#student_add_modal').modal('hide');
+					$('.mess_all').html(data);
+					allStudent();
 				}
 
 			});
@@ -39,4 +44,16 @@
 
 
 	});
+
+	//show all 
+	function allStudent(){
+		$.ajax({
+		url: 'inc/ajax/show_all_student.php',
+		success: function(data){
+			$('tbody#show_all_data').html(data);
+		}
+	});
+	}
+	allStudent();
+
 })(jQuery)
