@@ -3,13 +3,23 @@
 	$(document).ready(function(){
 		$('a#student_show').click(function(){
 			$('#student_add_modal').modal('show');
+			return false;
 		});
+
 	});
 
-	//show single student 
-	$('a#single_show').click(function(){
-		$('#single_student_modal').modal('show');
+	// //show single student 
+	// $('a#single_show').click(function(){
+	// 	$('#single_student_modal').modal('show');
+	// });
+
+	$(document).on('click','a#single_show', function(){
+			$('#single_student_modal').modal('show');
+
+			return false;
+
 	});
+
 
 	//add new student 
 	$('form#add_student_form').submit(function(e){
@@ -54,6 +64,34 @@
 		}
 	});
 	}
+
 	allStudent();
+
+	// delete student 
+	$(document).on('click','a#delete_student',function(){
+
+		let student_id = $(this).attr('student_id');
+		let con = confirm("are you sure");
+		if (con == true) {
+			$.ajax({
+				url: 'inc/ajax/delete_student.php',
+				data: {id : student_id},
+				method: "POST",
+				success: function(data){
+					$('.mess_all').html('<p class = "alert alert-danger">delete success fully<button class="close" data-dismiss = "alert">&times;</button></p>')
+					allStudent();
+				}
+
+
+			});
+		}else {
+			return false;
+		}
+
+		
+		return false;
+	});
+
+
 
 })(jQuery)
